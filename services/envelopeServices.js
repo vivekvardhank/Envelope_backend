@@ -73,5 +73,33 @@ const deleteEnvelopeDataById=(req)=>{
     return envelopes;
 }
 
+const transferEnvelopesAmount=(req)=>{
+    let fromIndex=-1;
+    let toIndex=-1;
+    const fromId = Number(req.params.fromId);
+    const toId = Number(req.params.toId);
+    const Amount=Number(req.body.Amount);
+    for(let i=0;i<envelopes.length;i++){
+        if(envelopes[i].id===fromId){
+            fromIndex=i;
+        }else if(envelopes[i].id===toId){
+            toIndex=i;
+        }
+    }
+    if(fromIndex<0 && toIndex<0){
+        return "from Id and to Id doesn't exist"
+    }else if(fromIndex <0){
+        return "from Id doesn't exist";
+    }else if(toIndex<0){
+        return "to Id doesn't exist";
+    }
+    if(envelopes[fromIndex].budget<Amount){
+        return "Insufficient funds"
+    }
+    envelopes[fromIndex].budget-=Amount;
+    envelopes[toIndex].budget+=Amount;
+    return envelopes;
 
-module.exports={getEnvelopesData, addEnvelopesData, getEnvelopeDataById, updateEnvelopeDataById, deleteEnvelopeDataById};
+}
+
+module.exports={getEnvelopesData, addEnvelopesData, getEnvelopeDataById, updateEnvelopeDataById, deleteEnvelopeDataById, transferEnvelopesAmount};

@@ -1,4 +1,4 @@
-const {getEnvelopesData,addEnvelopesData,getEnvelopeDataById,updateEnvelopeDataById,deleteEnvelopeDataById}=require('../services/envelopeServices')
+const {getEnvelopesData,addEnvelopesData,getEnvelopeDataById,updateEnvelopeDataById,deleteEnvelopeDataById,transferEnvelopesAmount}=require('../services/envelopeServices')
 
 const getEnvelopes = (req, res) => {
     try {
@@ -79,10 +79,26 @@ const deleteEnvelopeById=(req,res)=>{
     }
 }
 
+const transferEnvelopeAmount=(req,res)=>{
+    try{
+    const updatedEnvelopeData=transferEnvelopesAmount(req);
+    if(typeof(updatedEnvelopeData)=== 'object'){
+        res.status(200).json({ success: true, data: updatedEnvelopeData });
+    }
+    else if(typeof(updatedEnvelopeData)==='string'){
+        res.status(400).json({ success: false, data: updatedEnvelopeData });
+    }
+   }catch(error){
+       res.status(500).json({ success: false, message: "Internal server error" });
+   }
+   
+}
+
 module.exports = {
     getEnvelopes,
     addEnvelopes,
     getEnvelopeById,
     updateEnvelopeById,
-    deleteEnvelopeById
+    deleteEnvelopeById,
+    transferEnvelopeAmount
 };
