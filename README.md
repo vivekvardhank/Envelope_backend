@@ -25,3 +25,70 @@ This project implements a simple budget envelope system using Node.js and Expres
    2. cd Envelope_backend.
    3. npm install.
    4. npm start.
+      
+### API Endpoints
+
+Each endpoint manipulates or displays information related to the budget envelopes:
+
+#### Retrieve All Envelopes
+
+- **GET `/`**
+  - **Functionality**: Retrieves all budget envelopes.
+  - **Response Example**:
+    ```json
+    [
+      {"id": 1, "name": "Groceries", "budget": 300},
+      {"id": 2, "name": "Rent", "budget": 1200}
+    ]
+    ```
+
+#### Create a New Envelope
+
+- **POST `/`**
+  - **Middleware**: `validateRequest` - Ensures all required fields are present and valid.
+  - **Request Example**:
+    ```json
+    {"name": "Utilities", "budget": 150}
+    ```
+  - **Response Example**:
+    ```json
+    {"id": 3, "name": "Utilities", "budget": 150}
+    ```
+
+#### Transfer Budget Between Envelopes
+
+- **POST `/:fromId/:toId`**
+  - **Parameters**:
+    - `fromId`: ID of the envelope to transfer funds from.
+    - `toId`: ID of the envelope to transfer funds to.
+  - **Request Example**:
+    ```json
+    {"amount": 50}
+    ```
+  - **Response Example**:
+    ```json
+    {"message": "Transfer successful"}
+    ```
+
+#### Update an Envelope
+
+- **PUT `/:id`**
+  - **Parameters**: `id` - ID of the envelope to update.
+  - **Request Example**:
+    ```json
+    {"name": "Entertainment", "budget": 250}
+    ```
+  - **Response Example**:
+    ```json
+    {"id": 1, "name": "Entertainment", "budget": 250}
+    ```
+
+#### Delete an Envelope
+
+- **DELETE `/:id`**
+  - **Parameters**: `id` - ID of the envelope to delete.
+  - **Response Example**:
+    ```json
+    {"message": "Envelope deleted"}
+    ```
+
