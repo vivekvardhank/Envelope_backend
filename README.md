@@ -21,7 +21,7 @@ This project implements a simple budget envelope system using Node.js and Expres
 
 ### Installation
    
-   1.Clone the repository: git clone https://github.com/vivekvardhank/Envelope_backend.git
-   2.cd Envelope_backend
-   3.npm install
-   4.npm start
+   1. Clone the repository: git clone https://github.com/vivekvardhank/Envelope_backend.git.
+   2. cd Envelope_backend.
+   3. npm install.
+   4. npm start.
